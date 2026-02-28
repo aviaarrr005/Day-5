@@ -1,22 +1,28 @@
-public class StringBuilderDemo {
-    public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder("Hello");
+import java.util.Scanner;
+public class StringBuilderDemo{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String ip = "Baelor";
+        StringBuilder sb = new StringBuilder(ip);
+        
+        sb.append(" Targaryen");
+        System.out.println(sb.toString());
 
-        sb.append(" Java");
-        sb.append(" World");
-        
-        sb.insert(6, "Modern ");
-        
-        sb.replace(13, 17, "Universe");
-        
-        sb.delete(5, 12);
-        
+        //insert
+        sb.insert(0, "King ");
+        System.out.println(sb.toString());
+
+        //replace
+        sb.replace(5, 11, "Aegon");
+        System.out.println(sb.toString());
+
+        //delete
+        sb.delete(0, 5);
+        System.out.println(sb.toString());
+
+        //reverse
         sb.reverse();
-        
-        String result = sb.toString();
+        System.out.println(sb.toString());
 
-        System.out.println("Final Result: " + result);
-        System.out.println("Capacity: " + sb.capacity());
-        System.out.println("Length: " + sb.length());
     }
 }

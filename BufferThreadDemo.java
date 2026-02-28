@@ -1,36 +1,26 @@
-class BufferTask implements Runnable {
-    private StringBuffer buffer;
-
-    public BufferTask(StringBuffer buffer) {
-        this.buffer = buffer;
+class BufferTask implements Runnable{
+    private StringBuffer sb;
+    public BufferTask(StringBuffer sb){
+        this.sb=sb;
     }
 
-    @Override
-    public void run() {
-        for (int i = 0; i < 5; i++) {
-            buffer.append(Thread.currentThread().getName().charAt(7));
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-            }
+    public void run(){
+        for(int i=0;i<2000;i++){
+            sb.append("a");
         }
     }
 }
 
-public class BufferThreadDemo {
-    public static void main(String[] args) throws InterruptedException {
-        StringBuffer sharedBuffer = new StringBuffer();
-        
-        Thread t1 = new Thread(new BufferTask(sharedBuffer), "Thread-1");
-        Thread t2 = new Thread(new BufferTask(sharedBuffer), "Thread-2");
-
+public class BufferThreadDemo{
+    public static void main(String[] args) throws InterruptedException{
+        StringBuffer sb = new StringBuffer("Start");
+        Thread t1 = new Thread(new BufferTask(sb));
+        Thread t2 = new Thread(new BufferTask(sb));
         t1.start();
         t2.start();
 
         t1.join();
         t2.join();
-
-        System.out.println(sharedBuffer.toString());
-        System.out.println(sharedBuffer.length());
+        System.out.println(sb);
     }
 }
